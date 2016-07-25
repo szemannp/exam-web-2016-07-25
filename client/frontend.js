@@ -8,14 +8,17 @@ var frontendData = {
   headerAll: '*',
   postMethod: 'POST',
   successState: 200,
-  buttonAction: 'click'
+  buttonAction: 'click',
+  timeOut: 2500
 }
 
 var domSelectors = {
   resultContainer: document.querySelector('#displayResult'),
   sendButton: document.querySelector('.send'),
   shiftInput: document.querySelector('#setShift'),
-  inputText: document.querySelector('#textField')
+  inputText: document.querySelector('#textField'),
+  alertBox: document.querySelector('.alert'),
+  alertClass: 'hidden'
 };
 
 function setRequestObject() {
@@ -32,7 +35,11 @@ function sendDecodeRequest () {
   xhr.setRequestHeader(frontendData.headerCors, frontendData.headerAll);
   xhr.onload = function () {
     if (xhr.readyState === xhr.DONE && xhr.status === frontendData.successState) {
-      printDecoded(xhr.response);
+      printDecoded(JSON.parse(xhr.response));
+    }
+    if (xhr.status === 400) {
+      showAlert();
+      setTimeout(hideAlert, frontendData.timeOut);
     }
   }
   var data = setRequestObject();
@@ -41,7 +48,15 @@ function sendDecodeRequest () {
 
 function printDecoded (response) {
   var printBlock = domSelectors.resultContainer;
-  printBlock.textContent = response;
+  printBlock.textContent = response.text;
+}
+
+function showAlert () {
+  domSelectors.alertBox.classList.remove(domSelectors.alertClass);
+}
+
+function hideAlert () {
+  domSelectors.alertBox.classList.add(domSelectors.alertClass);
 }
 
 function setListener () {

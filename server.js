@@ -29,13 +29,13 @@ var msgSuccess = {
   "text": ''
 };
 
-function validateInput(text, shift) {
+function validateInput(res, text, shift) {
   if (shift <= -26 || shift >= 26) {
-    res.json(shiftError);
+    res.status(400).json(shiftError);
     return;
   }
   if (text < 1) {
-    res.json(inputError);
+    res.status(400).json(inputError);
     return;
   }
   return;
@@ -45,8 +45,8 @@ app.use(bodyParser.json());
 app.use(express.static(serverData.staticFolder));
 
 app.post(serverData.decode, urlencodedParser, function(req, res) {
-  validateInput(req.body.text, req.body.shift);
-  res.json(decipher.decipherMessage(req.body.text, req.body.shift));
+  validateInput(res, req.body.text, req.body.shift);
+  msgSuccess.text = decipher.decipherMessage(req.body.text, req.body.shift);
+  res.json(msgSuccess);
 });
-
 app.listen(serverData.serverPort);
