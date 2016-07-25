@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>caesar decipherer</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Caesar decipher API</h1>
+        <p>decode now, conquer after</p>
+      </div>
+    </div>
+    <br>
+    <div class="container">
+      <textarea class = 'input form-control' rows="12" placeholder  = 'Insert your message to decode...' id="textField"></textarea>
+    </div>
+    <div class="container input-group">
+      <label for="basic-url">Set decode shift:</label>
+      <input type="number" class="form-control" id="setShift" aria-describedby="basic-addon3" min="-25" max="25" placeholder="Use values between -25 and 25">
+    </div>
+    <br>
+    <div class="container">
+      <button type="button" class="btn btn-primary btn-lg btn-block send">Decode my message!</button>
+    </div>
+    <br>
+    <div class="container">
+      <p id="displayResult">Your decoded message will be placed here!</p>
+    </div>
+    <br>
+    <footer class="footer text-center">
+      <p>peet's kaiser decipher</p>
+    </footer>
+    <script src="frontend.js" type="text/javascript"></script>
+  </body>
+</html>
